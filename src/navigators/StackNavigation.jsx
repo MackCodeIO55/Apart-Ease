@@ -8,16 +8,18 @@ import TabNavigator from './TabNavigator';
 import SearchScreen from '../screens/SearchScreen';
 import HomeDetailScreen from '../screens/HomeDetailScreen';
 import ResetPassword from '../screens/Auth/ResetPassword';
+import {useSelector} from 'react-redux';
 
 const StackNavigation = () => {
   const Stack = createNativeStackNavigator();
-  const [isLogged, setIsLogged] = useState(false);
+  const isActive = useSelector(state => state.user.isLoggedIn);
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      {isLogged ? (
+      {isActive ? (
         <>
           <Stack.Screen
             name="TabNavigator"

@@ -81,5 +81,6 @@ const styles = StyleSheet.create({
   },
   font: {
     fontFamily: FONTFAMILY.poppins_medium,
+    color: COLORS.Black,
   },
 });

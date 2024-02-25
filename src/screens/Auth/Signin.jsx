@@ -4,8 +4,11 @@ import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import {COLORS, FONTFAMILY, SPACING} from '../../theme/theme';
 import Toast from 'react-native-toast-message';
+import {useDispatch} from 'react-redux';
+import {login} from '../../redux/Slice/userSlice';
 
 const Signin = ({navigation}) => {
+  const dispatch = useDispatch();
   const handleSignIn = () => {
     Toast.show({
       type: 'success',
@@ -13,6 +16,7 @@ const Signin = ({navigation}) => {
       text2: 'Sign in successfully',
       visibilityTime: 2000,
     });
+    dispatch(login());
     // navigation.navigate('TabNavigator');
   };
   return (
@@ -70,5 +74,6 @@ const styles = StyleSheet.create({
   },
   font: {
     fontFamily: FONTFAMILY.poppins_medium,
+    color: COLORS.Black,
   },
 });

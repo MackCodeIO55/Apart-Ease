@@ -5,6 +5,7 @@ import {COLORS, SPACING} from '../theme/theme';
 import Input from '../components/ui/Input';
 import axios from 'axios';
 import CardContainer from '../components/CardContainer';
+import globalStyles from '../styles/globalStyle';
 
 const HomeDetailScreen = ({navigation}) => {
   const [productData, setProductData] = useState([]);
@@ -23,7 +24,7 @@ const HomeDetailScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <AppHeader
         name={'arrow-left'}
         header={'Community Market'}
@@ -47,12 +48,6 @@ const HomeDetailScreen = ({navigation}) => {
 export default HomeDetailScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: 30,
-    backgroundColor: COLORS.White,
-    paddingHorizontal: SPACING.space_12,
-  },
   mainContainer: {
     display: 'flex',
     flexDirection: 'column',

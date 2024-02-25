@@ -1,47 +1,51 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Dimensions,
-  StatusBar,
-  ScrollView,
-} from 'react-native';
-import React from 'react';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import AppHeader from '../components/ui/AppHeader';
 import {COLORS, SPACING} from '../theme/theme';
-import SearchInput from '../components/ui/SearchInput';
-import Button from '../components/ui/Button';
-const {width, height} = Dimensions.get('window');
+import Input from '../components/ui/Input';
+import axios from 'axios';
+import CardContainer from '../components/CardContainer';
+import globalStyles from '../styles/globalStyle';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
+  const [productData, setProductData] = useState([]);
+
+  const getProductData = async () => {
+    try {
+      const res = await axios.get('https://fakestoreapi.com/products');
+      setProductData(res.data);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  useEffect(() => {
+    getProductData();
+  }, []);
+
   return (
-    <ScrollView
-      style={styles.container}
-      bounces={false}
-      contentContainerStyle={styles.scrollViewContainer}>
-      <View style={styles.inputHeaderContainer}>
-        <SearchInput />
+    <View style={globalStyles.container}>
+      <View style={styles.mainContainer}>
+        <Input placeholder={'Search here...'} />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={productData}
+          renderItem={({item}) => <CardContainer data={item} />}
+          numColumns={2}
+          contentContainerStyle={{gap: 10}}
+          columnWrapperStyle={{gap: 10}}
+        />
       </View>
-      <Button
-        onPress={() => {
-          navigation.navigate('HomeDetailScreen');
-        }}
-        title={'Details'}
-      />
-    </ScrollView>
+    </View>
   );
 };
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.Black,
-  },
-  scrollViewContainer: {},
-  inputHeaderContainer: {
-    marginHorizontal: SPACING.space_36,
-    marginTop: SPACING.space_28,
+  mainContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: SPACING.space_20,
   },
 });

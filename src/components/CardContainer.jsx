@@ -1,6 +1,7 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {BORDERRADIUS, COLORS, FONTFAMILY} from '../theme/theme';
+import globalStyles from '../styles/globalStyle';
 
 const CardContainer = ({data}) => {
   return (
@@ -14,7 +15,7 @@ const CardContainer = ({data}) => {
             'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png',
         }}
       />
-      <Text style={{fontFamily: FONTFAMILY.poppins_medium}}>{data.title}</Text>
+      <Text style={globalStyles.fontStyle}>{data.title}</Text>
       <Text>{data.price}</Text>
     </View>
   );

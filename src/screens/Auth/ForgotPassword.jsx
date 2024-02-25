@@ -4,6 +4,7 @@ import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import {COLORS, FONTFAMILY, SPACING} from '../../theme/theme';
 import Toast from 'react-native-toast-message';
+import InputOTP from '../../components/ui/InputOTP';
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const ForgotPassword = ({navigation}) => {
         source={require('../../assets/image/login.png')}
       />
       <Input placeholder={'Enter your email'} label={'E-mail address'} />
-      {gotOtp && <Input placeholder={'Enter OTP'} label={'OTP'} />}
+      {gotOtp && <InputOTP label={'OTP'} />}
       <Button
         title={`${gotOtp ? 'Verify' : 'Generate OTP'}`}
         full
